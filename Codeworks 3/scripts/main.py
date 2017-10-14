@@ -2,25 +2,26 @@
 
 from machine import Machine
 
-machine = Machine()
-
-prefix = "../text/"
-
-file1 = open(prefix + "file1.txt", "r")
-file2 = open(prefix + "file2.txt", "w")
-file3 = open(prefix + "file3.txt", "w")
-
+machine 		= Machine()
+prefix 			= "../text/"
+binary			= True														#True for binary modes, False for text modes
+file_mode  		= ["rb", "wb+", "wb"] if binary else ["r", "w+", "w"]
 rotor_config 	= "ABAE07D6CDEF28497234987A0BCD"							#Use any hexadecimal string
-rotor_key		= 3490														#Use any number
-letter_key		= -23843													#Use any number
+rotor_key		= 3490														#Use any integer
+letter_key		= -23843													#Use any integer
+
+with open(prefix + "file1.txt", file_mode[0]) as file1:
+	plaintext 	= file1.read()
 
 machine.configure(rotor_config)
-machine.encrypt(machine, file1.read(), rotor_key, letter_key)
-machine.decrypt(machine, machine.get_encrypted(), rotor_key, letter_key)
+machine.encrypt(machine, plaintext, rotor_key, letter_key, binary)
 
-file2.write(machine.get_encrypted())
-file3.write(machine.get_decrypted())
+with open(prefix + "file2.txt", file_mode[1]) as file2:
+	file2.write(machine.get_encrypted())
+	file2.seek(0)
+	ciphertext 	= file2.read()
+	
+machine.decrypt(machine, ciphertext, rotor_key, letter_key, binary)
 
-file1.close()
-file2.close()
-file3.close()
+with open(prefix + "file3.txt", file_mode[2]) as file3:
+	file3.write(machine.get_decrypted())

@@ -17,17 +17,17 @@ class Rotors:
 	rotorXIV					= [' ', '>', 'S', '\x1c', ')', '\x16', 'f', '\x19', '\x05', '\x14', 'l', '@', '-', '\x02', 'h', '4', '\x1d', 'D', 'v', '\x18', '|', '3', 'm', '5', '\x1f', '.', '"', '\x0f', ']', 'U', '2', 'O', '\t', 'p', '\x15', 'q', '\x12', '\x01', '6', 'H', ':', 'G', '`', '\r', 'b', 'i', 'J', 'a', 'L', '\x0c', '?', '\x0b', '\x10', 'k', 'o', '^', 'W', 'g', '\n', '0', 'I', '\x13', '$', '1', '<', 'A', '}', '[', '\x17', '%', "'", 'd', '/', '\x1e', '(', '~', 't', '\x1a', 'R', 'y', '9', '\x03', '+', '_', '\x1b', 'j', 'T', 'c', '\x11', 'X', '\x04', '\x0e', 'P', 's', 'Z', 'F', 'E', 'z', '\x07', '&', '\x7f', 'w', ',', 'M', 'x', '*', '\x00', 'e', '=', '7', '!', 'C', '\\', 'N', 'B', '#', '{', '8', 'n', 'Y', '\x06', 'Q', 'r', 'u', 'V', ';', 'K', '\x08']
 	rotorXV						= ['/', '3', '\x18', 'i', 'A', 'P', '\x00', '?', '{', '*', 'a', 'j', '\n', 'I', 'd', 'g', '\r', '\x05', 'W', '\x14', '5', 'v', '\x04', ')', 'M', '\x19', '\x1e', '\t', 'C', 'S', 'O', 'b', '0', '^', '}', '@', '\x02', 'V', '~', 's', '\x08', ':', 'u', 'K', '\x12', ' ', 'm', '[', '4', '<', 'l', '!', '\x16', '\x1b', '\x15', 'Y', 'e', '#', '6', '+', '7', ';', 'J', 'N', '\x0e', 'B', '\x03', '|', 'n', '\x1a', '.', 'R', '\x7f', 'x', ']', '(', '=', '\x0c', '$', 'X', '1', '\\', 'r', '_', 'h', 'y', '\x13', '\x07', 'G', '9', 'D', '\x06', 'p', 'L', '&', 'Q', 'F', '\x10', 'E', 'f', '2', '`', ',', '\x01', 'Z', '\x1f', 't', "'", 'T', 'H', '>', '\x1d', '\x17', '\x1c', 'o', '%', '\x11', '-', 'q', 'c', '\x0f', 'z', '8', 'w', 'U', '\x0b', 'k', '"']
 	rotorXVI					= ['0', '{', '\x06', '-', 'L', '=', 'g', 'f', ';', '\r', '\x07', '\x02', '\x18', '\x0b', 'E', '|', '8', '}', 'H', '\\', 'd', '\x7f', '\x14', '@', '\x0c', '^', 'u', 'G', 'Y', 'O', '9', 'i', '\x11', ':', '~', ' ', 'F', '%', 'j', '#', ']', 'Q', '1', 'D', 's', '&', '*', 'Z', 'e', 'm', 'a', '<', '2', 'P', 'z', '?', '\x1b', '\x05', 'W', 'N', '/', 'k', '\x0f', '\x1a', 'I', 'p', '\x12', 'q', '`', '\n', '\x13', '"', '\x04', 'M', 'T', 'S', ',', '\x19', 'r', '\x08', '\x1d', '\x15', 'n', '\x03', 'c', 'J', 'h', ')', '_', '7', 'b', 'o', '\x10', 't', 'y', 'R', '$', '3', "'", 'B', 'A', '5', '\x1f', 'l', 'w', '\x16', 'V', '\x1e', '\x00', '\x0e', '+', '\x17', 'U', '6', '!', 'v', '.', '\t', 'K', '4', 'x', '\x01', '[', '>', '(', '\x1c', 'X', 'C']
-
+	
 	all_rotors					= [rotorI, rotorII, rotorIII, rotorIV, rotorV, rotorVI, rotorVII, rotorVIII, rotorIX, iPhoneX, rotorXI, rotorXII, rotorXIII, rotorXIV, rotorXV, rotorXVI]
 	
 	def __init__(self):
 		"""
 		Initialzes the Rotors object with the default rotor configuration.
 		"""
-		self.rotor_set 			= [self.rotorI, self.rotorII, self.rotorIII, self.rotorIV, self.rotorV, self.rotorVI, self.rotorVII, self.rotorVIII, self.rotorIX, self.iPhoneX]
+		self.default_config		= "123456789A"
+		self.rotor_length		= len(self.rotorI)
 		
-		self.rotor_limit 		= len(self.rotor_set)
-		self.rotor_length 		= len(self.rotorI)
+		self.configure(self.default_config)
 	
 	def configure(self, rotor_config):
 		"""
@@ -54,8 +54,5 @@ class Rotors:
 		"""
 		Returns the current rotor configuration
 		"""
-		try:
-			return self.config_list
-		except AttributeError:
-			return "123456789A"
+		return self.config_list
 			

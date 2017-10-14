@@ -1,7 +1,7 @@
 #! /usr/bin/env python
 
 class Encoder:
-	def encrypt(self, rotors, plaintext, rotor_key, letter_key):
+	def encrypt(self, rotors, plaintext, rotor_key, letter_key, binary):
 		""" 
 		Encrypts a message.
 		
@@ -11,11 +11,14 @@ class Encoder:
 		@type   plaintext: string
 		@param  plaintext: The message to be encrypted
 		
-		@type   rotor_key: number
+		@type   rotor_key: integer
 		@param  rotor_key: A modifier that determines which rotor is used
 		
-		@type  letter_key: number
+		@type  letter_key: integer
 		@param letter_key: A modifier that determines which letter is used
+		
+		@type 	   binary: boolean
+		@param     binary: A value that function the method if it is dealing with binary files or not
 		"""
 		self.key_zero				= rotor_key
 		self.key_tens				= letter_key
@@ -27,7 +30,7 @@ class Encoder:
 		self.encrypted				= ""
 		
 		for self.index in range (0, self.original_count):
-			self.ascii 				= ord(self.original_list[self.index])				
+			self.ascii 				= self.original_list[self.index] if binary else ord(self.original_list[self.index])
 			self.modifier_one		= (self.modifier_one + 1) * -1
 			self.modifier_two		= (self.modifier_two + self.modifier_one) * -1
 			self.modifier_total		= self.ascii + self.key_tens + self.modifier_two
@@ -39,6 +42,9 @@ class Encoder:
 			self.rotor_choice 		= (self.rotor_choice + self.key_zero + 1) % rotors.rotor_limit
 			
 			self.encrypted 			+= rotors.rotor_set[self.rotor_choice][self.modifier_total]
+		
+		if binary:
+			self.encrypted			= (self.encrypted).encode('utf-8')
 	
 	def get_encrypted(self):
 		"""
