@@ -6,7 +6,7 @@ machine 		= Machine()
 prefix 			= "../text/"
 binary			= True														#True for binary modes, False for text modes
 file_mode  		= ["rb", "wb+", "wb"] if binary else ["r", "w+", "w"]
-rotor_config 	= "ABAE07D6CDEF28497234987A0BCD"							#Use any hexadecimal string
+rotor_config	= "ABAE07D6CDEF28497234987A0BCD"							#Use any hexadecimal string
 rotor_key		= 3490														#Use any integer
 letter_key		= -23843													#Use any integer
 

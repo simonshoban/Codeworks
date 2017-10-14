@@ -1,6 +1,9 @@
 #! /usr/bin/env python
 
 class Decoder:
+	"""
+	A class that can decrypt a message and return it to the calling environment
+	"""
 	def decrypt(self, rotors, ciphertext, rotor_key, letter_key, binary):
 		""" 
 		Decrypts a message.
@@ -18,7 +21,7 @@ class Decoder:
 		@param letter_key: A modifier that determines which letter is used
 		
 		@type 	   binary: boolean
-		@param     binary: A value that tells the function if it is dealing with binary files or not
+		@param     binary: A value that tells the function if it is dealing with binary modes or not
 		"""
 		self.key_zero				= rotor_key
 		self.key_tens				= letter_key
@@ -50,6 +53,8 @@ class Decoder:
 	def get_decrypted(self):
 		"""
 		Returns the decrypted message.
+		
+		@rtype  self.decrypted: string if using text mode, bytes if using binary mode
+		@return self.decrypted: The decrypted message
 		"""
 		return self.decrypted
-		
